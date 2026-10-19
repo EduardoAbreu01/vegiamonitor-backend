@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SituacaoAtual {
-
     private Integer score;
     private String status;
     private String corStatus;

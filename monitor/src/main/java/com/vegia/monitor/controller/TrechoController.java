@@ -1,31 +1,28 @@
+// TrechoController.java
 package com.vegia.monitor.controller;
 
 import com.vegia.monitor.model.Trecho;
 import com.vegia.monitor.repository.TrechoRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/trechos")
+@RequestMapping({"/trechos", "/rodovias"})
+@CrossOrigin(origins = "*")
 public class TrechoController {
 
-    private final TrechoRepository repository;
-
-    public TrechoController(TrechoRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private TrechoRepository repository;
 
     @GetMapping
-    public ResponseEntity<List<Trecho>> listarTodos() {
-        return ResponseEntity.ok(repository.findAll());
+    public List<Trecho> listarTrechos() {
+        return repository.findAll();
     }
 
-    @PostMapping("/lote")
-    public ResponseEntity<List<Trecho>> salvarEmLote(@RequestBody List<Trecho> trechos) {
-        List<Trecho> salvos = repository.saveAll(trechos);
-        return ResponseEntity.status(HttpStatus.CREATED).body(salvos);
+    @GetMapping("/{id}")
+    public Trecho buscarPorId(@PathVariable String id) {
+        return repository.findById(id).orElse(null);
     }
 }

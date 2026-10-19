@@ -1,3 +1,4 @@
+// TrechoRepository.java
 package com.vegia.monitor.repository;
 
 import com.vegia.monitor.model.Trecho;
